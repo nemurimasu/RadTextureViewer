@@ -34,15 +34,12 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    sourceFolder: RadTextureViewer.Setup/bin/x64/Release
+    sourceFolder: RadTextureViewer.Setup/bin/$(buildPlatform)/$(buildConfiguration)
     contents: '*.msi'
     targetFolder: $(Build.ArtifactStagingDirectory)
 
-- task: GitHubRelease@0
-  condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/release-v')
+- task: PublishBuildArtifacts@1
   inputs:
-    gitHubConnection: nemurimasu
-    repositoryName: nemurimasu/RadTextureViewer
-    assets: $(Build.ArtifactStagingDirectory)/*
-    isDraft: true
-    addChangeLog: true
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
