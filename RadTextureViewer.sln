@@ -30,6 +30,7 @@ Global
 		{B1074064-86FC-42A3-9B0C-EB7E6BF6F6B7}.Release|x64.Build.0 = Release|Any CPU
 		{287F8097-0CC5-450E-891D-0638E4FCB68A}.Debug|x64.ActiveCfg = Debug|x64
 		{287F8097-0CC5-450E-891D-0638E4FCB68A}.Release|x64.ActiveCfg = Release|x64
+		{287F8097-0CC5-450E-891D-0638E4FCB68A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

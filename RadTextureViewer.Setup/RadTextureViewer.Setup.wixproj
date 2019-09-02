@@ -55,7 +55,7 @@
   </Target>
   <Target Name="BeforeBuild">
     <!-- https://nblumhardt.com/2017/04/netcore-msi/ -->
-    <!--<Exec Command="dotnet publish ..\RadTextureViewer\RadTextureViewer.csproj -c $(Configuration) -r win-x64" />-->
+    <Exec Command="dotnet publish ..\RadTextureViewer\RadTextureViewer.csproj -c $(Configuration) -r win-x64" />
     <PropertyGroup>
       <LinkerBaseInputPaths>..\RadTextureViewer\bin\$(Configuration)\netcoreapp3.0\win-x64\publish</LinkerBaseInputPaths>
       <DefineConstants>BasePath=..\RadTextureViewer\bin\$(Configuration)\netcoreapp3.0\win-x64\publish</DefineConstants>
