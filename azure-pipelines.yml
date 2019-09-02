@@ -27,7 +27,7 @@ steps:
   inputs:
     command: 'restore'
     restoreSolution: '**/packages.config'
-    restoreDirectory: 'packages'
+    restoreDirectory: '$(Build.Repository.LocalPath)/packages'
 
 - task: DotNetCoreCLI@2
   inputs:
