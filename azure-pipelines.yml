@@ -25,7 +25,9 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
+    command: 'restore'
     restoreSolution: '**/packages.config'
+    restoreDirectory: 'packages'
 
 - task: DotNetCoreCLI@2
   inputs:
