@@ -97,10 +97,11 @@ namespace RadTextureViewer.Core
             BodySize = bodySize;
             _time = time;
             Prefix = prefix;
-            Thumbnail = Observable.Defer(() => Observable.FromAsync(async ct =>
+            // Use Task.Run here to keep LoadThumbnailAsync off the UI thread.
+            Thumbnail = Observable.Defer(() => Observable.FromAsync(ct => Task.Run(async () =>
             {
                 return await LoadThumbnailAsync(ct).ConfigureAwait(false);
-            })).PublishLast().RefCount();
+            }, ct))).PublishLast().RefCount();
         }
     }
 }

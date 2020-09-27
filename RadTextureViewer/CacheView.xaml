@@ -16,12 +16,17 @@
             <TextBox x:Name="locationTextBox" Margin="3">%LOCALAPPDATA%\Catznip64\texturecache\texture.entries</TextBox>
         </DockPanel>
         <Grid>
-            <ListView x:Name="contentListView" BorderThickness="0">
+            <ListView x:Name="contentListView" BorderThickness="0" VirtualizingPanel.VirtualizationMode="Recycling">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <wpftk:VirtualizingWrapPanel/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <ItemContainerTemplate DataType="rad:CacheEntry">
+                        <local:CacheEntryView ViewModel="{Binding .}" />
+                    </ItemContainerTemplate>
+                </ListView.ItemTemplate>
             </ListView>
             <ProgressBar x:Name="loadingProgress" DockPanel.Dock="Bottom" IsIndeterminate="True" Height="1" VerticalAlignment="Top" BorderThickness="0"/>
         </Grid>
