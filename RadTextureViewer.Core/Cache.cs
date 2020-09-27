@@ -30,7 +30,7 @@ namespace RadTextureViewer.Core
 
             using var bufferOwner = MemoryPool<byte>.Shared.Rent(HEADER_SIZE);
             var buffer = bufferOwner.Memory.Slice(0, HEADER_SIZE);
-            if (await indexStream.ReadAsync(buffer, ct) != HEADER_SIZE)
+            if (await indexStream.ReadAsync(buffer, ct).ConfigureAwait(false) != HEADER_SIZE)
             {
                 throw new EndOfStreamException();
             }
@@ -42,7 +42,7 @@ namespace RadTextureViewer.Core
 
             for (var i = 0u; i < entryCount; i++)
             {
-                if (await indexStream.ReadAsync(buffer.Slice(0, ENTRY_SIZE), ct) != ENTRY_SIZE)
+                if (await indexStream.ReadAsync(buffer.Slice(0, ENTRY_SIZE), ct).ConfigureAwait(false) != ENTRY_SIZE)
                 {
                     throw new EndOfStreamException();
                 }
@@ -57,7 +57,7 @@ namespace RadTextureViewer.Core
                 var time = BitConverter.ToInt32(buffer.Slice(24, 4).Span);
 
                 var prefix = new Memory<byte>(new byte[Math.Min(CACHE_SIZE, imageSize - bodySize)]);
-                if (await cacheStream.ReadAsync(prefix) != prefix.Length)
+                if (await cacheStream.ReadAsync(prefix, ct).ConfigureAwait(false) != prefix.Length)
                 {
                     // all remaining entries, if any, are incomplete
                     throw new EndOfStreamException();

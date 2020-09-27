@@ -58,7 +58,7 @@ namespace RadTextureViewer
                         {
                             var image = await model.LoadAsync(CancellationToken.None).ConfigureAwait(false);
                             await using var output = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 4096, FileOptions.Asynchronous | FileOptions.SequentialScan);
-                            await output.WriteAsync(image);
+                            await output.WriteAsync(image).ConfigureAwait(false);
                         });
                     }
                 };

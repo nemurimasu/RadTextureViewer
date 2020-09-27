@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" 
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\WiX.3.11.1\build\wix.props" Condition="Exists('..\packages\WiX.3.11.1\build\wix.props')" />
+<Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\WiX.3.11.2\build\wix.props" Condition="Exists('..\packages\WiX.3.11.2\build\wix.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -29,7 +28,6 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
     <None Include="Shortcut.xsl" />
   </ItemGroup>
   <ItemGroup>
@@ -42,27 +40,30 @@
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
   <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
     <Error Text="The WiX Toolset v3.11 (or newer) build tools must be installed to build this project. To download the WiX Toolset, see http://wixtoolset.org/releases/" />
   </Target>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\WiX.3.11.1\build\wix.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WiX.3.11.1\build\wix.props'))" />
-  </Target>
   <Target Name="BeforeBuild">
     <!-- https://nblumhardt.com/2017/04/netcore-msi/ -->
     <Exec Command="dotnet publish ..\RadTextureViewer\RadTextureViewer.csproj -c $(Configuration) -r win-x64" />
     <PropertyGroup>
-      <LinkerBaseInputPaths>..\RadTextureViewer\bin\$(Configuration)\netcoreapp3.0\win-x64\publish</LinkerBaseInputPaths>
-      <DefineConstants>BasePath=..\RadTextureViewer\bin\$(Configuration)\netcoreapp3.0\win-x64\publish</DefineConstants>
+      <LinkerBaseInputPaths>..\RadTextureViewer\bin\$(Configuration)\netcoreapp3.1\win-x64\publish</LinkerBaseInputPaths>
+      <DefineConstants>BasePath=..\RadTextureViewer\bin\$(Configuration)\netcoreapp3.1\win-x64\publish</DefineConstants>
     </PropertyGroup>
-    <HeatDirectory OutputFile="$(IntermediateOutputPath)RadTextureViewer.wxs" DirectoryRefId="INSTALLFOLDER" ComponentGroupName="RadTextureViewer_Project" SuppressCom="true" Directory="..\RadTextureViewer\bin\$(Configuration)\netcoreapp3.0\win-x64\publish" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" AutoGenerateGuids="false" GenerateGuidsNow="true" ToolPath="$(WixToolPath)" PreprocessorVariable="var.BasePath" Transforms="Shortcut.xsl" />
+    <HeatDirectory OutputFile="$(IntermediateOutputPath)RadTextureViewer.wxs" DirectoryRefId="INSTALLFOLDER" ComponentGroupName="RadTextureViewer_Project" SuppressCom="true" Directory="..\RadTextureViewer\bin\$(Configuration)\netcoreapp3.1\win-x64\publish" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" AutoGenerateGuids="false" GenerateGuidsNow="true" ToolPath="$(WixToolPath)" PreprocessorVariable="var.BasePath" Transforms="Shortcut.xsl" />
     <ItemGroup>
       <Compile Include="$(IntermediateOutputPath)RadTextureViewer.wxs" />
     </ItemGroup>
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\WiX.3.11.2\build\wix.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WiX.3.11.2\build\wix.props'))" />
   </Target>
 </Project>

@@ -53,7 +53,7 @@ namespace RadTextureViewer.Core
             if (BodySize > 0)
             {
                 await using var bodyStream = new FileStream(BodyLocation, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 4096, FileOptions.Asynchronous | FileOptions.SequentialScan);
-                if (await bodyStream.ReadAsync(image.Slice(Prefix.Length, (int)BodySize), ct) != BodySize)
+                if (await bodyStream.ReadAsync(image.Slice(Prefix.Length, (int)BodySize), ct).ConfigureAwait(false) != BodySize)
                 {
                     throw new EndOfStreamException();
                 }
@@ -80,7 +80,7 @@ namespace RadTextureViewer.Core
             if (BodySize > 0)
             {
                 await using var bodyStream = new FileStream(BodyLocation, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 4096, FileOptions.Asynchronous | FileOptions.SequentialScan);
-                if (await bodyStream.ReadAsync(image.Slice(Prefix.Length, (int)BodySize), ct) != BodySize)
+                if (await bodyStream.ReadAsync(image.Slice(Prefix.Length, (int)BodySize), ct).ConfigureAwait(false) != BodySize)
                 {
                     throw new EndOfStreamException();
                 }
