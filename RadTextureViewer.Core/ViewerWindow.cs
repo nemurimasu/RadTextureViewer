@@ -46,7 +46,7 @@ namespace RadTextureViewer.Core
 
         IDisposable PopulateCache<TObject>(ObservableCollection<TObject> cache, IObservable<IObservable<TObject>> source)
         {
-            IDisposable populate = null;
+            IDisposable? populate = null;
             var subscription = source.ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(next =>
                 {

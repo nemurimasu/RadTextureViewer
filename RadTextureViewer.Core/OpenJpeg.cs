@@ -75,8 +75,8 @@ namespace RadTextureViewer.Core
                             {
                                 var factor = Log2(inputMax / maxDimension);
                                 NativeMethods.opj_set_decoded_resolution_factor(codec, (uint)factor);
-                                width >>= factor;
-                                height >>= factor;
+                                width = Math.Max(1, width >> factor);
+                                height = Math.Max(1, height >> factor);
                             }
                             if (!(NativeMethods.opj_decode(codec, stream, image) && NativeMethods.opj_end_decompress(codec, stream)))
                             {
