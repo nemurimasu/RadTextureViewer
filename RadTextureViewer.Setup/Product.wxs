@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" Name="Rad Texture Viewer" Language="1033" Version="1.0.0.0" Manufacturer="Nemu" UpgradeCode="facff73f-8a69-4bb8-9637-b46c7b1d9434">
+  <Product Id="*" Name="Rad Texture Viewer" Language="1033" Version="1.0.1.0" Manufacturer="Nemu" UpgradeCode="facff73f-8a69-4bb8-9637-b46c7b1d9434">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />

@@ -9,6 +9,7 @@
     <PublishReadyToRun>true</PublishReadyToRun>
     <PublishTrimmed>true</PublishTrimmed>
     <Platforms>x64</Platforms>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
